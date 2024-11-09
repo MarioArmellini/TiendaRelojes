@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Relojes{% endblock %}
+
+{% block main %}
+<!-- Imagen principal fuera de la sección de relojes -->
+<img src="{% static 'fotoCasioMTP-1302PD-3AV.avif' %}" alt="Poster de la King League" width="820px">
+
+<section>
+  <div class="relojes">
+    {% for reloj in relojes %}
+    <article class="reloj">
+      <a href="detalle/{{ relojes.id }}">
+        <img src="{% static relojes.fotoUrl %}" alt="Foto de {{ relojes.nombre }} {{ relojes.marca }}">
+      </a>
+      <h2><a href="detalle/{{ relojes.id }}">{{ relojes.nombre }} {{ relojes.marca }}</a></h2>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}

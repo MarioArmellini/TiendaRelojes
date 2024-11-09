@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{relojes.nombre}} {{relojes.marca}} {% endblock %}
+
+{% block main%}
+    <h1>{{relojes.nombre}} {{relojes.marca}}</h1>
+    <section>
+        <img src="{% static relojes.fotoUrl %}" alt="Foto de {{relojes.nombre}} {{relojes.marca}}">
+    </section>
+{% endblock %}

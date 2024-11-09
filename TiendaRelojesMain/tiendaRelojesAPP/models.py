@@ -30,7 +30,7 @@ class Reloj(models.Model):
     nombre = models.CharField(max_length=30)
     marca = models.CharField(max_length=30)
     precio = models.FloatField()
-    filtro = models.ForeignKey(Filtro, on_delete=models.CASCADE, related_name='relojes', null=True, blank=True)
+    fotoUrl = models.CharField(max_length=250, null=True)
     def __str__(self):
         return f"{self.marca} - {self.nombre}"
 

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  {% block head_extra %}{% endblock %}
+</head>
+
+<body>
+  {%block header%}
+  <header>
+    <div id="main">
+      <div id="header">
+        <div id="logo">
+          <div id="logo_text">
+            <h1><a href="">Watch<span class="logo_colour">Shop</span></a></h1>
+            <h2>¿ Lookign for time ?</h2>
+          </div>
+        </div>
+        <div id="menubar">
+          <ul id="menu">
+            <li><a href="{% url 'index' %}">HOME</a></li>
+            <li><a href="{% url 'relojes' %}">RELOJES</a></li>
+            <li><a href="{% url 'compra' %}">COMPRA</a></li>
+          </ul>
+        </div>
+      </div>
+  </header>
+  {% endblock %}
+  <main>
+    {% block content %}
+
+    {% endblock %}
+  </main>
+  <footer id="footer">
+    {%block footer%}
+    Copyright &copy; colour_green | <a href="http://validator.w3.org/check?uri=referer">HTML5</a> | <a
+      href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> | <a
+      href="http://www.html5webtemplates.co.uk">Website templates</a>
+    {%endblock%}
+  </footer>
+</body>
+
+</html>
