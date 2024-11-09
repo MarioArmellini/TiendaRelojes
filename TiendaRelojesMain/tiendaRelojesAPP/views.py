@@ -17,30 +17,14 @@ class RelojesListView(generic.ListView):
 class RelojesView(generic.DetailView):
     template_name = 'relojDetalle.html'
     model = Reloj
-    context_object_name = 'relojes'
+    context_object_name = 'reloj'
 
 class CompraListView(generic.ListView):
     template_name = 'compra.html'
     model = Compra
+    context_object_name = 'compras'
+    
 class CompraView(generic.DetailView):
     template_name = 'compraDetalle.html'
     model = Compra
-"""""
-#def index(request):
-#    return HttpResponse("Hello, world!")
-
-def home(request):
-    return render(request, 'index.html')
-
-#def index(request):
-#    return render(request, 'index.html')
-
-def examples(request):
-    return render(request, 'examples.html')
-
-def page(request):
-    return render(request, 'page.html')
-
-def another_page(request):
-    return render(request, 'another_page.html')
-"""""
+    context_object_name = 'compra'

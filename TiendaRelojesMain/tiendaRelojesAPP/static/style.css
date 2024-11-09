@@ -14,9 +14,9 @@ p
 { padding: 0 0 20px 0;
   line-height: 1.7em;}
 
-img
-{ border: 0;}
-
+img {
+ border: 0;
+}
 h1, h2, h3, h4, h5, h6 
 { font: normal 175% 'century gothic', arial, sans-serif;
   color: #43423F;
@@ -295,29 +295,81 @@ table tr td
   color: #47433F;
   border-top: 1px solid #FFF;}
 
-
-.relojes{
+.relojes {
   display: flex;
-  justify-content: space-around;
   flex-wrap: wrap;
-  margin-top: 100px;
-  margin-bottom: 25px;
-  padding: 20px;
+  margin: 100px;
 }
-
-.reloj {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 20px;
-  margin: 10px;
-  width: 300px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
-.reloj img{
-  max-width: 100%;
+.relojes .reloj img {
+  max-width: 250px;
   height: auto;
-  border-radius: 50%;
+  border: 1px solid rgb(0, 0, 0);
+  border-bottom: 0;
+  border-top: 0;
+  border-right: 0;
+}
+.relojes .reloj h2 a{
+  color: #000000; /* Cambia a cualquier color que desees */
+  font-size: small;
+}
+
+.relojInd{
+  display: flex;
+  flex-wrap: wrap;
+  margin: 50px;
+}
+h1 {
+  color: #000000; /* Cambia a cualquier color que desees */
+  font-size: large;
+}
+.relojInd img{
+  margin-bottom: 30px;
+  margin-left: 100px;
+  max-width: 500px;
+  height: auto;
+  border-bottom: 0;
+  border-top: 0;
+  border-right: 0;
+}
+.relojInd h2{
+  font-size: large;
+  font: 'century gothic', arial, sans-serif;
+  color: #000000;
+}
+.relojInd h3 {
+  display: inline-block; /* Asegura que el h3 se comporte como un bloque en línea */
+  padding: 10px 20px; /* Espaciado dentro del botón */
+  background-color: #4CAF50; /* Color de fondo (puedes cambiarlo) */
+  color: white; /* Color del texto */
+  font-size: 1.2em; /* Tamaño del texto */
+  text-align: center; /* Centra el texto */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cambia el cursor al pasar por encima */
+  transition: background-color 0.3s ease; /* Transición suave para el color */
+}
+
+.relojInd h3:hover {
+  background-color: #45a049; /* Color de fondo cuando se pasa el mouse sobre el botón */
+}
+.relojInd2{
+  display: inline;
+  flex-wrap: wrap;
+}
+.carrito{
+  
+  font: 'century gothic', arial, sans-serif;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-left: 350px;
+}
+.carrito h1{
+  font-size: large;
+  color: #000000;
+}
+.fondoAnimado{
+  display: flex;
+  justify-content: center;  /* Centra la imagen horizontalmente */
+  align-items: center;      /* Centra la imagen verticalmente */
+  margin: 0;   
+  background-color: #000; 
 }

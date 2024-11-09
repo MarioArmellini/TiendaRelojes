@@ -1,57 +1,59 @@
 {% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE HTML>
-<html>
 
-<head>
-  <title>colour_green - another page</title>
-  <meta name="description" content="website description" />
-  <meta name="keywords" content="website keywords, website keywords" />
-  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
-</head>
+{% block title %} Carrito de Compras {% endblock %}
 
-<body>
-  {% block content %}
-  <div id="main">
-    <div id="site_content">
-      <div class="sidebar">
-        <img class="jugador" src="static " alt="Foto de {{relojes.nombre}} {{relojes.marca}}">
+{% block content %}
+    <div class="carrito">
+        <h1>Carrito de Compras</h1>
+        
+        <div id="cart">
+            <h3>Productos en el carrito</h3>
+            <ul id="cart-list">
+            </ul>
+            <h3 id="total-price">Precio Total: 0 €</h3>
+            <button id="checkout-btn">Finalizar compra</button>
+        </div>
 
-        <!-- insert your sidebar items here -->
-        <h3>Latest News</h3>
-        <h4>New Website Launched</h4>
-        <h5>January 1st, 2010</h5>
-        <p>2010 sees the redesign of our website. Take a look around and let us know what you think.<br /><a href="#">Read more</a></p>
-        <p></p>
-        <h4>New Website Launched</h4>
-        <h5>January 1st, 2010</h5>
-        <p>2010 sees the redesign of our website. Take a look around and let us know what you think.<br /><a href="#">Read more</a></p>
-        <h3>Useful Links</h3>
-        <ul>
-          <li><a href="#">link 1</a></li>
-          <li><a href="#">link 2</a></li>
-          <li><a href="#">link 3</a></li>
-          <li><a href="#">link 4</a></li>
-        </ul>
-        <h3>Search</h3>
-        <form method="post" action="#" id="search_form">
-          <p>
-            <input class="search" type="text" name="search_field" value="Enter keywords....." />
-          </p>
-        </form>
-      </div>
-      <div id="content">
-        <!-- insert the page content here -->
-        <h1>Another Page</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui.</p>
-      </div>
     </div>
-    <div id="content_footer"></div>
-  {% endblock %}
-</body>
-</html>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Función para actualizar el carrito visualmente
+            function actualizarCarrito() {
+                const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+                const cartList = document.getElementById('cart-list');
+                const totalPriceElement = document.getElementById('total-price');
+
+                cartList.innerHTML = '';
+                let total = 0;
+
+                if (carrito.length === 0) {
+                    const mensaje = document.createElement('li');
+                    mensaje.textContent = "Tu carrito está vacío";
+                    cartList.appendChild(mensaje);
+                    totalPriceElement.textContent = "Precio Total: 0 €";
+                } else {
+                    carrito.forEach(function(reloj) {
+                        const li = document.createElement('li');
+                        li.innerHTML = `
+                            <img src="${reloj.fotoUrl}" alt="${reloj.nombre}" width="50">
+                            <span>${reloj.nombre}</span>
+                            <span>${reloj.precio} €</span>
+                        `;
+                        cartList.appendChild(li);
+                        total += parseFloat(reloj.precio);
+                    });
+                    totalPriceElement.textContent = `Precio Total: ${total.toFixed(2)} €`;
+                }
+            }
+            actualizarCarrito();
+
+            // Event listener para el botón de finalizar compra (puedes agregar lógica para redirigir a otra página o procesar la compra)
+            document.getElementById('checkout-btn').addEventListener('click', function() {
+                // Aquí puedes añadir la lógica para redirigir al usuario a la página de pago o procesar la compra
+                alert("Redirigiendo al proceso de compra...");
+            });
+        });
+    </script>
+{% endblock %}

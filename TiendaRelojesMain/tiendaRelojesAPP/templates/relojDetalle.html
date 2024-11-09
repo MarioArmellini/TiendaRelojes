@@ -1,10 +1,48 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}{{relojes.nombre}} {{relojes.marca}} {% endblock %}
 
-{% block main%}
-    <h1>{{relojes.nombre}} {{relojes.marca}}</h1>
-    <section>
-        <img src="{% static relojes.fotoUrl %}" alt="Foto de {{relojes.nombre}} {{relojes.marca}}">
+{% block title %}{{reloj.nombre}} {{reloj.marca}} {% endblock %}
+
+{% block content %}
+    <section class="relojInd">
+        <img src="{% static reloj.fotoUrl %}" alt="Foto de {{reloj.nombre}} {{reloj.marca}}">
+        <section class="relojInd2">
+            <h1>{{reloj.nombre}} {{reloj.marca}}</h1>
+            <h2>Precio:  {{reloj.precio}} €</h2>
+            <h3 class="add-to-cart" 
+                data-id="{{ reloj.id }}" 
+                data-nombre="{{ reloj.nombre }}" 
+                data-precio="{{ reloj.precio }}" 
+                data-foto="{{ reloj.fotoUrl }}">
+                Añadir al carro
+            </h3>
+        </section>
     </section>
+
+    <script>
+        // Añadir evento de clic para agregar al carrito
+        document.addEventListener('DOMContentLoaded', function() {
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Obtener datos del reloj
+                    const reloj = {
+                        id: this.getAttribute('data-id'),
+                        nombre: this.getAttribute('data-nombre'),
+                        precio: this.getAttribute('data-precio'),
+                        foto: this.getAttribute('data-foto')
+                    };
+
+                    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+                    carrito.push(reloj);
+
+                    localStorage.setItem('carrito', JSON.stringify(carrito));
+                    //Mensaje de alerta de la pagina
+                    alert('Producto añadido al carrito');
+                });
+            });
+        });
+    </script>
 {% endblock %}
