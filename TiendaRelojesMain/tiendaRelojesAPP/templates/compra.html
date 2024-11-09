@@ -12,7 +12,10 @@
             <ul id="cart-list">
             </ul>
             <h3 id="total-price">Precio Total: 0 €</h3>
-            <button id="checkout-btn">Finalizar compra</button>
+            <div class="botonesCarrito">
+                <button id="finalizar">Finalizar compra</button>
+                <button id="borrar">Eliminar compra</button>
+            </div>
         </div>
 
     </div>
@@ -48,11 +51,16 @@
                 }
             }
             actualizarCarrito();
-
+            // Event listener para el botón de eliminar compra
+            document.getElementById('borrar').addEventListener('click', function() {
+                localStorage.removeItem('carrito');
+                actualizarCarrito();
+                alert("El carrito ha sido vaciado.");
+            });
             // Event listener para el botón de finalizar compra (puedes agregar lógica para redirigir a otra página o procesar la compra)
-            document.getElementById('checkout-btn').addEventListener('click', function() {
+            document.getElementById('finalizar').addEventListener('click', function() {
                 // Aquí puedes añadir la lógica para redirigir al usuario a la página de pago o procesar la compra
-                alert("Redirigiendo al proceso de compra...");
+                alert("Compra finalizada");
             });
         });
     </script>

@@ -337,26 +337,25 @@ h1 {
   color: #000000;
 }
 .relojInd h3 {
-  display: inline-block; /* Asegura que el h3 se comporte como un bloque en línea */
-  padding: 10px 20px; /* Espaciado dentro del botón */
-  background-color: #4CAF50; /* Color de fondo (puedes cambiarlo) */
-  color: white; /* Color del texto */
-  font-size: 1.2em; /* Tamaño del texto */
-  text-align: center; /* Centra el texto */
-  border-radius: 5px; /* Bordes redondeados */
-  cursor: pointer; /* Cambia el cursor al pasar por encima */
-  transition: background-color 0.3s ease; /* Transición suave para el color */
+  display: inline-block;
+  padding: 10px 20px; 
+  background-color: #4CAF50;
+  color: white; 
+  font-size: 1.2em;
+  text-align: center; 
+  border-radius: 5px; 
+  cursor: pointer;
+  transition: background-color 0.3s ease; 
 }
 
 .relojInd h3:hover {
-  background-color: #45a049; /* Color de fondo cuando se pasa el mouse sobre el botón */
+  background-color: #45a049; 
 }
 .relojInd2{
   display: inline;
   flex-wrap: wrap;
 }
 .carrito{
-  
   font: 'century gothic', arial, sans-serif;
   margin-top: 50px;
   margin-bottom: 50px;
@@ -372,4 +371,26 @@ h1 {
   align-items: center;      /* Centra la imagen verticalmente */
   margin: 0;   
   background-color: #000; 
+}
+#finalizar{
+  display: inline-block;
+  padding: 10px 20px; 
+  background-color: #4CAF50;
+  color: white; 
+  font-size: 1.2em;
+  text-align: center; 
+  border-radius: 5px; 
+  cursor: pointer;
+  transition: background-color 0.3s ease; 
+}
+#borrar{
+  display: inline-block;
+  padding: 10px 20px; 
+  background-color: #af4c4c;
+  color: white; 
+  font-size: 1.2em;
+  text-align: center; 
+  border-radius: 5px; 
+  cursor: pointer;
+  transition: background-color 0.3s ease; 
 }
