@@ -1,67 +1,32 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %} Carrito de Compras {% endblock %}
+{% block title %}Compras{% endblock %}
 
 {% block content %}
-    <div class="carrito">
-        <h1>Carrito de Compras</h1>
-        
-        <div id="cart">
-            <h3>Productos en el carrito</h3>
-            <ul id="cart-list">
-            </ul>
-            <h3 id="total-price">Precio Total: 0 €</h3>
-            <div class="botonesCarrito">
-                <button id="finalizar">Finalizar compra</button>
-                <button id="borrar">Eliminar compra</button>
-            </div>
-        </div>
+<section>
+    <div class="compras">
+        {% for compra in compras %}
+            <article class="compra">
+                <h2>Compra ID: {{ compra.id }}</h2>
 
+                <div class="relojes_en_compra">
+                    {% for reloj in compra.relojes.all %}
+                        <article class="reloj">
+                            <a href="{% url 'compraDetalle' reloj.id %}">
+                                <img src="{% static reloj.fotoUrl %}" alt="Foto de {{ reloj.nombre }} {{ reloj.marca }}">
+                            </a>
+                            <div class="relojInfo">
+                                <h4><a href="{% url 'relojDetalle' reloj.id %}">{{ reloj.marca }} - {{ reloj.nombre }}</a></h4>
+                                <p>Precio: {{ reloj.precio }}€</p>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+                <h3>Precio total de la compra: {{ compra.precioCompra }}€</h3>
+
+            </article>
+        {% endfor %}
     </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Función para actualizar el carrito visualmente
-            function actualizarCarrito() {
-                const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-                const cartList = document.getElementById('cart-list');
-                const totalPriceElement = document.getElementById('total-price');
-
-                cartList.innerHTML = '';
-                let total = 0;
-
-                if (carrito.length === 0) {
-                    const mensaje = document.createElement('li');
-                    mensaje.textContent = "Tu carrito está vacío";
-                    cartList.appendChild(mensaje);
-                    totalPriceElement.textContent = "Precio Total: 0 €";
-                } else {
-                    carrito.forEach(function(reloj) {
-                        const li = document.createElement('li');
-                        li.innerHTML = `
-                            <img src="${reloj.fotoUrl}" alt="${reloj.nombre}" width="50">
-                            <span>${reloj.nombre}</span>
-                            <span>${reloj.precio} €</span>
-                        `;
-                        cartList.appendChild(li);
-                        total += parseFloat(reloj.precio);
-                    });
-                    totalPriceElement.textContent = `Precio Total: ${total.toFixed(2)} €`;
-                }
-            }
-            actualizarCarrito();
-            // Event listener para el botón de eliminar compra
-            document.getElementById('borrar').addEventListener('click', function() {
-                localStorage.removeItem('carrito');
-                actualizarCarrito();
-                alert("El carrito ha sido vaciado.");
-            });
-            // Event listener para el botón de finalizar compra (puedes agregar lógica para redirigir a otra página o procesar la compra)
-            document.getElementById('finalizar').addEventListener('click', function() {
-                // Aquí puedes añadir la lógica para redirigir al usuario a la página de pago o procesar la compra
-                alert("Compra finalizada");
-            });
-        });
-    </script>
+</section>
 {% endblock %}

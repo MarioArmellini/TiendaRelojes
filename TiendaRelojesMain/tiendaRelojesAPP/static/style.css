@@ -394,3 +394,31 @@ h1 {
   cursor: pointer;
   transition: background-color 0.3s ease; 
 }
+.compras { 
+  padding: 100px 100px; 
+}
+.compras h3{ 
+  color: #1293EE;
+}
+.compra{
+  margin-top: 20px;
+  padding: 10px 10px; 
+  border: 1px solid rgb(0, 0, 0);
+}
+.compra .reloj {
+  border: 1px solid rgb(129, 127, 127);
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: 0;
+  border-left: 0;
+  border-right: 0;
+}
+.compra .reloj .relojInfo {
+  display: table-column;
+  flex-wrap: wrap;
+  padding: 10px 10px;
+}
+.compra .reloj img{
+  padding: 10px 10px;
+  max-width: 50px;
+}

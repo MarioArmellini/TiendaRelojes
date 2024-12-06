@@ -26,5 +26,10 @@ class CompraListView(generic.ListView):
     
 class CompraView(generic.DetailView):
     template_name = 'compraDetalle.html'
-    model = Compra
+    model = Reloj
     context_object_name = 'compra'
+
+class CarritoListView(generic.ListView):
+    template_name = 'carrito.html'
+    model = Compra
+    context_object_name = 'carrito'    

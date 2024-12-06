@@ -35,9 +35,19 @@ class Reloj(models.Model):
         return f"{self.marca} - {self.nombre}"
 
 
+
 class Compra(models.Model):
-    precioCompra = models.FloatField()
-    reloj = models.ForeignKey(Reloj, on_delete=models.CASCADE, related_name='compras', null=True, blank=True)
+    precioCompra = models.FloatField(editable=False, null=False, default=0)
+    relojes = models.ManyToManyField(Reloj, related_name='compras')
+
+    def calcular_precio_total(self):
+        return sum(reloj.precio for reloj in self.relojes.all())
+
+    def save(self, *args, **kwargs):
+        # Solo actualizamos `precioCompra` si ya está guardado (no al crearlo)
+        if self.pk:
+            self.precioCompra = self.calcular_precio_total()
+        super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.id}: {self.reloj} - {self.precioCompra}€"
+        return f"Compra {self.id}: {self.precioCompra}€ - {self.relojes.count()} relojes"
