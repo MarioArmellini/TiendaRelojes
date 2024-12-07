@@ -13,10 +13,9 @@ class CompraAdmin(admin.ModelAdmin):
     filter_horizontal = ('relojes',)
 
     def save_model(self, request, obj, form, change):
-        super().save_model(request, obj, form, change)
-        # Aseguramos que el precio total se calcule correctamente después de guardar
+        # Antes de guardar, recalculamos el precio total de la compra
         obj.precioCompra = obj.calcular_precio_total()
-        obj.save()
+        super().save_model(request, obj, form, change)
 
     def mostrar_relojes(self, obj):
         return ", ".join([str(reloj) for reloj in obj.relojes.all()])

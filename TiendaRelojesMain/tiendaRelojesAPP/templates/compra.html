@@ -9,7 +9,6 @@
         {% for compra in compras %}
             <article class="compra">
                 <h2>Compra ID: {{ compra.id }}</h2>
-
                 <div class="relojes_en_compra">
                     {% for reloj in compra.relojes.all %}
                         <article class="reloj">
