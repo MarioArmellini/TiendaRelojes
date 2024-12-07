@@ -8,13 +8,14 @@
 <section>
   <div class="relojes">
     {% for reloj in relojes %}
-    <article class="reloj">
+    <article class="reloj" data-id="{{ reloj.id }}">
       <a href="detalle/{{ reloj.id }}">
-        <img src="{% static reloj.fotoUrl %}" alt="Foto de {{ reloj.nombre }} {{ reloj.marca }}">
+          <img src="{% static reloj.fotoUrl %}" alt="Foto de {{ reloj.nombre }} {{ reloj.marca }}">
       </a>
       <h2><a href="detalle/{{ reloj.id }}">{{ reloj.nombre }} {{ reloj.marca }}</a></h2>
-    </article>
+  </article>
     {% endfor %}
   </div>
+  <div id="tooltip" style="display: none; position: absolute; background: #333; color: #fff; padding: 10px; border-radius: 5px; z-index: 1000;"></div>
 </section>
 {% endblock %}

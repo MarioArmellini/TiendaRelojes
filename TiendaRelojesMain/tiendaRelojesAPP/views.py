@@ -4,7 +4,11 @@ from django.template import loader
 from django.views import generic
 from django.http import HttpResponse
 from .models import *
-# Create your views here.
+
+# uso de AJAX 
+from django.shortcuts import get_object_or_404
+from django.http import JsonResponse
+from .models import Reloj
 
 class IndexView(generic.TemplateView):
     template_name = 'index.html'
@@ -33,3 +37,16 @@ class CarritoListView(generic.ListView):
     template_name = 'carrito.html'
     model = Compra
     context_object_name = 'carrito'    
+
+# Devuelve los detalles del reloj 
+def reloj_detalle_ajax(_, pk):
+    try:
+        reloj = Reloj.objects.get(pk=pk)
+        data = {
+            'nombre': reloj.nombre,
+            'marca': reloj.marca,
+            'precio': reloj.precio,
+        }
+        return JsonResponse(data)
+    except Reloj.DoesNotExist:
+        return JsonResponse({'error': 'Reloj no encontrado'}, status=404)
