@@ -20,12 +20,12 @@
             </li>
         </ul>        
         <!-- Formulario para crear un nuevo contacto -->
-        <h2 style="color: black;">Crear Contacto</h2>
+        <h2 style="color: black; margin-top: 20px; margin-bottom: 20px;">Crear Contacto</h2>
         <form @submit.prevent="createContact">
             <input type="text" v-model="newContact.name" placeholder="Nombre" required />
             <input type="email" v-model="newContact.email" placeholder="Email" required />
             <input type="text" v-model="newContact.phone" placeholder="Teléfono" required />
-            <button type="submit" style="display: inline-block; padding: 10px 10px; background-color: #af4c4c; color: white;
+            <button type="submit" style="padding: 10px 10px; background-color: #af4c4c; color: white;
             font-size: 1.2em; text-align: center; border-radius: 5px; cursor: pointer;
             ">Crear Contacto</button>
         </form>
@@ -52,14 +52,13 @@
                 fetchContacts() {
                 axios.get('http://127.0.0.1:8000/api/contacts/')
                     .then(response => {
-                        console.log("Respuesta completa:", response);  // Ver todos los detalles de la respuesta
                         console.log("Datos de los contactos:", response.data);  // Ver solo los datos
                         this.contacts = response.data;  // Asignar los datos a la variable
                     })
                     .catch(error => {
                         console.log("Error al obtener contactos:", error);
                     });
-            },
+                },
 
 
                 // Crear un nuevo contacto
