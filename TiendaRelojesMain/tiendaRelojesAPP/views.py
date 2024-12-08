@@ -10,6 +10,14 @@ from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
 from .models import Reloj
 
+# vue
+from rest_framework.permissions import AllowAny
+from django.shortcuts import render
+from rest_framework.viewsets import ModelViewSet
+from .models import Contact  # Importa tu modelo de Contact
+from .serializers import ContactSerializer  # Asegúrate de tener un serializer para Contact
+
+
 class IndexView(generic.TemplateView):
     template_name = 'index.html'
 
@@ -50,3 +58,14 @@ def reloj_detalle_ajax(_, pk):
         return JsonResponse(data)
     except Reloj.DoesNotExist:
         return JsonResponse({'error': 'Reloj no encontrado'}, status=404)
+    
+def vue_app(request):
+    return render(request, 'indexVue.html')
+
+class ContactViewSet(ModelViewSet):
+    """
+    API ViewSet para gestionar contactos.
+    """
+    queryset = Contact.objects.all()  # Recupera todos los contactos
+    serializer_class = ContactSerializer  # Usa el serializer para Contact
+    permission_classes = [AllowAny] 

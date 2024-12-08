@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="{% static 'style.css' %}">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="{% static 'hoverEffect.js' %}"></script>  
-  <script src="{% static 'agendaVue.js' %}"></script>
+
   {% block head_extra %}{% endblock %}
 </head>
 
@@ -32,7 +32,7 @@
             <li><a href="{% url 'relojes' %}">RELOJES</a></li>
             <li><a href="{% url 'compra' %}">MIS COMPRAS</a></li>
             <li><a href="{% url 'carrito' %}">CARRITO</a></li>
-
+            <li><a href="{% url 'vue_app' %}">AGENDA VUE</a></li>
           </ul>
         </div>
       </div>

@@ -1,29 +1,8 @@
-{% extends 'base.html' %}
+{% extends 'index2.html' %}
 {% load static %}
 
 {% block title %}Detalles de la Compra{% endblock %}
 
 {% block content %}
-<section class="compra-detalle">
-  <article class="detalle-compra">
-    <!-- Imagen de la compra -->
-    <div class="compra-imagen">
-      <img src="{% static compra.fotoUrl %}" alt="Foto de {{ compra.nombre }} {{ compra.marca }}">
-    </div>
 
-    <!-- Información de la compra -->
-    <div class="compra-info">
-      <h1>{{ compra.nombre }} - {{ compra.marca }}</h1>
-      <p><strong>Precio:</strong> {{ compra.precioCompra }}</p>
-      <p><strong>Descripción:</strong> {{ compra.descripcion }}</p>
-      <p><strong>Reloj:</strong> {{ compra.reloj }}</p>
-      <p><strong>Fecha de compra:</strong> {{ compra.fechaCompra }}</p>
-    </div>
-
-    <!-- Botón para volver a la lista de compras -->
-    <div class="boton-volver">
-      <a href="{% url 'compra' %}" class="btn-volver">Volver a compras</a>
-    </div>
-  </article>
-</section>
 {% endblock %}

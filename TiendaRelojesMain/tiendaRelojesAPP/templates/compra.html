@@ -12,7 +12,7 @@
                 <div class="relojes_en_compra">
                     {% for reloj in compra.relojes.all %}
                         <article class="reloj">
-                            <a href="{% url 'compraDetalle' reloj.id %}">
+                            <a href="{% url 'relojDetalle' reloj.id %}">
                                 <img src="{% static reloj.fotoUrl %}" alt="Foto de {{ reloj.nombre }} {{ reloj.marca }}">
                             </a>
                             <div class="relojInfo">

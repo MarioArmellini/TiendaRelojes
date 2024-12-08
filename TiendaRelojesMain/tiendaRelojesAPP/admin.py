@@ -7,6 +7,7 @@ from .models import Compra, Reloj
 admin.site.register(Filtro)
 admin.site.register(Reloj)
 
+# Registra una compra actualizando el precio total
 @admin.register(Compra)
 class CompraAdmin(admin.ModelAdmin):
     list_display = ('id', 'precioCompra', 'mostrar_relojes')

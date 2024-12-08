@@ -34,8 +34,6 @@ class Reloj(models.Model):
     def __str__(self):
         return f"{self.marca} - {self.nombre}"
 
-
-
 class Compra(models.Model):
     precioCompra = models.FloatField(editable=False, null=False, default=0)
     relojes = models.ManyToManyField(Reloj, related_name='compras')
@@ -51,3 +49,11 @@ class Compra(models.Model):
 
     def __str__(self):
         return f"Compra {self.id}: {self.precioCompra}€ - {self.relojes.count()} relojes"
+
+class Contact(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=15)
+
+    def __str__(self):
+        return f"{self.name} - {self.email} - {self.phone}"

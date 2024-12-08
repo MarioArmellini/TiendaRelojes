@@ -1,0 +1,92 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block title %}Agenda de Contactos{% endblock %}
+
+{% block content %}
+    <div style="margin: 50px; margin-left: 330px;" id="app">
+        <h1 >Agenda de Contactos</h1>
+        
+        <!-- Mostrar mensaje si no hay contactos -->
+        <div v-if="contacts.length === 0">No hay contactos.</div>
+        
+        <!-- Mostrar lista de contactos -->
+        <ul>
+            <li v-for="contact in contacts" :key="contact.id">
+                {{ contact.name }} - {{ contact.email }} - {{ contact.phone }}
+                <button @click="deleteContact(contact.id)" style="display: inline-block; padding: 5px 5px; background-color: #af4c4c; color: white;
+                font-size: 1.2em; text-align: center; border-radius: 5px; cursor: pointer;"
+                >Borrar</button>
+            </li>
+        </ul>        
+        <!-- Formulario para crear un nuevo contacto -->
+        <h2 style="color: black;">Crear Contacto</h2>
+        <form @submit.prevent="createContact">
+            <input type="text" v-model="newContact.name" placeholder="Nombre" required />
+            <input type="email" v-model="newContact.email" placeholder="Email" required />
+            <input type="text" v-model="newContact.phone" placeholder="Teléfono" required />
+            <button type="submit" style="display: inline-block; padding: 10px 10px; background-color: #af4c4c; color: white;
+            font-size: 1.2em; text-align: center; border-radius: 5px; cursor: pointer;
+            ">Crear Contacto</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                contacts: [], // Lista de contactos
+                newContact: { // Nuevo contacto
+                    name: '',
+                    email: '',
+                    phone: ''
+                }
+            },
+            mounted() {
+                this.fetchContacts(); // Cargar contactos al cargar la página
+            },
+            methods: {
+                // Obtener los contactos de la API
+                fetchContacts() {
+                axios.get('http://127.0.0.1:8000/api/contacts/')
+                    .then(response => {
+                        console.log("Respuesta completa:", response);  // Ver todos los detalles de la respuesta
+                        console.log("Datos de los contactos:", response.data);  // Ver solo los datos
+                        this.contacts = response.data;  // Asignar los datos a la variable
+                    })
+                    .catch(error => {
+                        console.log("Error al obtener contactos:", error);
+                    });
+            },
+
+
+                // Crear un nuevo contacto
+                createContact() {
+                    axios.post('http://127.0.0.1:8000/api/contacts/', this.newContact)
+                        .then(response => {
+                            this.contacts.push(response.data);  // Añadir el nuevo contacto a la lista
+                            this.newContact = { name: '', email: '', phone: '' };  // Limpiar el formulario
+                        })
+                        .catch(error => {
+                            console.log("Error creating contact:", error);
+                        });
+                },
+                // Eliminar un contacto
+                deleteContact(contactId) {
+                // Hacer la solicitud DELETE a la API
+                    axios.delete(`http://127.0.0.1:8000/api/contacts/${contactId}/`)
+                        .then(response => {
+                            console.log('Contacto eliminado:', response.data);
+                            // Eliminar el contacto de la lista local
+                            this.contacts = this.contacts.filter(contact => contact.id !== contactId);
+                        })
+                        .catch(error => {
+                            console.error('Error al eliminar contacto:', error);
+                        });
+                }   
+            }
+        });
+    </script>
+{% endblock %}
